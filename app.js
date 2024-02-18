@@ -2,12 +2,12 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-
+const authorization = null;
 
 //routesHandlers
-const loginRouter = require('./routes/loginRoute');
+const loginRouter    = require('./routes/loginRoute');
 const registerRouter = require('./routes/registerRoute');
-
+const tasksRouter    = require('./routes/tasksRoute');
 
 //db
 require('./connections/mongodb');
@@ -27,7 +27,7 @@ app.use(bodyParser.json());
 //routes
 app.use('/login',loginRouter);
 app.use('/register',registerRouter);
-
+app.use('/tasks',tasksRouter);
 
 
 

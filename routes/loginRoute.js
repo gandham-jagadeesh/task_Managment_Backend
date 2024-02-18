@@ -11,8 +11,7 @@ loginRouter.post('/',async(req,res)=>{
     const user = users[0];
     const userGmail =  user.email;
     const hash = user.password;
-    const result = bcrypt.compare(password,hash);
-   
+    const result = await bcrypt.compare(password,hash);
     if(result){
        const token = jwt.sign({ userId: userGmail }, 'your-secret-key', {
            expiresIn: '1h',
@@ -20,7 +19,7 @@ loginRouter.post('/',async(req,res)=>{
            res.status(200).json({ token });       
     }
     else{
-       res.status(203).send({'msg':'password not correct'});
+       res.status(403).send({'msg':'password not correct'});
     }}
     else{
        res.status(400).send({'msg':"gmail not found"});
