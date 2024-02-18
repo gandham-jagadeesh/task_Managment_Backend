@@ -3,7 +3,7 @@ const registerModel = require('../models/registerModel');
 const registerRouter = require('express').Router();
 
 
-registerRouter.post("/register",async (req,res)=>{
+registerRouter.post("/",async (req,res)=>{
     try{
        const email = req.body.email;
        const password = req.body.password;
@@ -12,7 +12,6 @@ registerRouter.post("/register",async (req,res)=>{
            email:email,
            password:hashed
        })
-       console.log(email,password);
        await data.save();
        res.status(200).send({response:'registered sucessfully'})
    }

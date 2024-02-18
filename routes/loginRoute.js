@@ -1,8 +1,9 @@
 const loginRouter = require('express').Router();
+const registerModel = require('../models/registerModel');
 const jwt     = require('jsonwebtoken');
 
 
-loginRouter.post('/login',async(req,res)=>{
+loginRouter.post('/',async(req,res)=>{
     const {email,password} = req.body;
     const users = await registerModel.find({email});
     const length    = users.length
