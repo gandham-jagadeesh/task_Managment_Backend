@@ -13,7 +13,7 @@ registerRouter.post("/",async (req,res)=>{
            password:hashed
        })
        await data.save();
-       res.status(200).send({response:'registered sucessfully'})
+       res.status(200).send({'msg':'registered sucessfully'})
    }
     
    catch(e){

@@ -1,7 +1,7 @@
 const loginRouter = require('express').Router();
 const registerModel = require('../models/registerModel');
 const jwt     = require('jsonwebtoken');
-
+const bcrypt  = require('bcrypt');
 
 loginRouter.post('/',async(req,res)=>{
     const {email,password} = req.body;
@@ -20,10 +20,10 @@ loginRouter.post('/',async(req,res)=>{
            res.status(200).json({ token });       
     }
     else{
-       res.status(203).send({res:'password not correct'});
+       res.status(203).send({'msg':'password not correct'});
     }}
     else{
-       res.status(400).send({'res':"gmail not found"});
+       res.status(400).send({'msg':"gmail not found"});
     }
     
    });
