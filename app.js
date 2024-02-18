@@ -3,10 +3,13 @@ const mongoose = require('mongoose');
 const bcrypt  = require('bcrypt');
 const jwt     = require('jsonwebtoken');
 const app = express();
+const cors = require('cors');
 const bodyParser = require('body-parser');
 
 const registerModel = require('./models/registerModel');
 const url = "mongodb+srv://MarkNicholas:Mark2002112@cluster0.ohkkzev.mongodb.net/Developer";
+
+
 
 async function dbConnection(){
     try{
@@ -20,6 +23,7 @@ async function dbConnection(){
 
 dbConnection();
 
+app.use(cors())
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
@@ -41,10 +45,10 @@ app.post('/login',async(req,res)=>{
         res.status(200).json({ token });       
  }
  else{
-    res.json({status:203,res:'wrong password buddy'});
+    res.status(203).send({res:'password not correct'});
  }}
  else{
-    res.json({status:400,res:'user not found'});
+    res.status(400).send({'res':"gmail not found"});
  }
  
 });
@@ -58,18 +62,19 @@ app.post("/register",async (req,res)=>{
         email:email,
         password:hashed
     })
+    console.log(email,password);
     await data.save();
-    res.json({res:200,data:'sucessfully stored'});
+    res.status(200).send({response:'registered sucessfully'})
 }
  
 catch(e){
-    res.json({res:400,data:'unique value found not registered sucessfully'});
+    res.status(400).send({data:e});
     console.log('error',e);
 }
 
 });
 
 
-app.listen(5000,'192.168.0.5',()=>{
+app.listen(5000,()=>{
     console.log('listening at 5000 port');
 });

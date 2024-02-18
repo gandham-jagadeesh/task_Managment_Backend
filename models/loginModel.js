@@ -2,7 +2,7 @@ const mongoose  = require('mongoose');
 const Schema    = require('mongoose').Schema;
 
 const loginSchema = new Schema({
-    gmail : {
+ email : {
         type:String,
         unique : true,
         require: true,
